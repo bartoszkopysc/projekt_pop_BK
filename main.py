@@ -1,18 +1,54 @@
 from tkinter import *
-
 import tkintermapview
+import requests
+from bs4 import BeautifulSoup
+
+couriercompanys = []
+workers = []
+clients = []
+
+class Couriercompany:
+    def __init__(self, name, city):
+        self.name = name
+        self.city = city
+        self.coordinates = self.get_coordinates()
+        self.marker = map_widget.set_marker(self.coordinates[0], self.coordinates[1], text=self.name)
+
+    def get_coordinates(self):
+        url = f"https://pl.wikipedia.org/wiki/{self.city}"
+        response = requests.get(url).text
+        soup = BeautifulSoup(response, "html.parser")
+        lon = float(soup.select(".longitude")[1].text.replace(",", "."))
+        lat = float(soup.select(".latitude")[1].text.replace(",", "."))
+        return [lat, lon]
+
+class Worker:
+    def __init__(self, name, surname, city, Couriercompany):
+        self.name = name
+        self.surname = surname
+        self.city = city
+        self.Couriercompany = Couriercompany
+        self.coordinates = self.get_coordinates()
+        self.marker = map_widget.set_marker(self.coordinates[0], self.coordinates[1], text=f"{self.name} {self.surname}")
+
+    def get_coordinates(self):
+        url = f"https://pl.wikipedia.org/wiki/{self.city}"
+        response = requests.get(url).text
+        soup = BeautifulSoup(response, "html.parser")
+        lon = float(soup.select(".longitude")[1].text.replace(",", "."))
+        lat = float(soup.select(".latitude")[1].text.replace(",", "."))
+        return [lat, lon]
+
+class Client:
+    def __init__(self, name, surname, city, Couriercompany, class_name):
+        self.name = name
+        self.surname = surname
+        self.city = city
+        self.Couriercompany = Couriercompany
+        self.coordinates = self.get_coordinates()
+        self.marker = map_widget.set_marker(self.coordinates[0], self.coordinates[1], text=f"{self.name} {self.surname}")
 
 
-users:list=[]
-
-class User:
-    def _init_(self,name,surname,location,post):
-        self.name =name
-        self.surname=surname
-        self.location=location
-        self.post=post
-        self.coordinates=self.get_coordinates()
-        self.marker=map_widget.set_marker(self.coordinates[0],self.coordinates[1])
 
     def get_coordinates(self) -> list:
         import requests
