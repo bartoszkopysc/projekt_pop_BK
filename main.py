@@ -185,7 +185,7 @@ def update_Worker(idx):
     show_workers()
 
 def update_Worker_Couriercompany_menu():
-    menu = optionmenu_Worker_Couriercompany["menu"]
+    menu = optionmenu_Worker_Couriercompany["Menu"]
     menu.delete(0, "end")
     for Couriercompany in couriercompanys:
         menu.add_command(label=Couriercompany.name, command=lambda value=Couriercompany.name: var_Worker_Couriercompany.set(value))
