@@ -308,3 +308,209 @@ root.geometry("1024x800")
 
 button_frame = Frame(root)
 button_frame.grid(row=0, column=0)
+
+def show_couriercompanys_frame():
+    frame_couriercompanys.tkraise()
+
+def show_workers_frame():
+    frame_workers.tkraise()
+
+Button(button_frame, text="Pokaż firmy kurierskie", command=show_couriercompanys_frame).grid(row=0, column=0, padx=5, pady=5)
+Button(button_frame, text="Pokaż pracowników", command=show_workers_frame).grid(row=0, column=1, padx=5, pady=5)
+Button(button_frame, text="Pokaż klientów", command=lambda: frame_clients.tkraise()).grid(row=0, column=2, padx=5, pady=5)
+
+
+frame_couriercompanys = Frame(root)
+frame_couriercompanys.grid(row=1, column=0, sticky="nsew")
+frame_workers = Frame(root)
+frame_workers.grid(row=1, column=0, sticky="nsew")
+
+
+frame_Couriercompany_list = Frame(frame_couriercompanys)
+frame_Couriercompany_form = Frame(frame_couriercompanys)
+frame_Couriercompany_details = Frame(frame_couriercompanys)
+
+Label(frame_Couriercompany_details, text="Pracownicy w tej firmie:").grid(row=1, column=0, sticky="w", padx=5)
+listbox_workers_in_Couriercompany = Listbox(frame_Couriercompany_details, width=50, height=5)
+listbox_workers_in_Couriercompany.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+
+Label(frame_Couriercompany_details, text="Klienci w tej firmie:").grid(row=1, column=1, sticky="w", padx=5)
+listbox_clients_in_Couriercompany = Listbox(frame_Couriercompany_details, width=50, height=5)
+listbox_clients_in_Couriercompany.grid(row=2, column=1, sticky="nsew", padx=5, pady=5)
+
+Label(frame_Couriercompany_details, text="Nazwa:").grid(row=0, column=0, sticky="w", padx=5)
+label_Couriercompany_name_val = Label(frame_Couriercompany_details, text="...")
+label_Couriercompany_name_val.grid(row=0, column=1, sticky="w", padx=5)
+
+Label(frame_Couriercompany_details, text="Miejscowość:").grid(row=0, column=2, sticky="w", padx=5)
+label_Couriercompany_city_val = Label(frame_Couriercompany_details, text="...")
+label_Couriercompany_city_val.grid(row=0, column=3, sticky="w", padx=5)
+
+frame_Couriercompany_details.grid_columnconfigure(0, weight=1)
+frame_Couriercompany_details.grid_columnconfigure(1, weight=1)
+frame_Couriercompany_details.grid_columnconfigure(2, weight=0)
+frame_Couriercompany_details.grid_columnconfigure(3, weight=0)
+frame_Couriercompany_details.grid_rowconfigure(2, weight=1)
+
+frame_Couriercompany_list.grid(row=0, column=0, sticky="nsew")
+frame_Couriercompany_form.grid(row=0, column=1, sticky="nsew")
+frame_Couriercompany_details.grid(row=0, column=2, sticky="nsew")
+
+Label(frame_Couriercompany_list, text="Lista firm kurierskich:").grid(row=0, column=0, columnspan=3)
+listbox_couriercompanys = Listbox(frame_Couriercompany_list, width=50)
+listbox_couriercompanys.grid(row=1, column=0, columnspan=3)
+Button(frame_Couriercompany_list, text="Pokaż szczegóły", command=show_Couriercompany_details).grid(row=2, column=0)
+Button(frame_Couriercompany_list, text="Edytuj", command=edit_Couriercompany).grid(row=2, column=1)
+Button(frame_Couriercompany_list, text="Usuń", command=delete_Couriercompany).grid(row=2, column=2)
+
+Label(frame_Couriercompany_form, text="Nazwa firmy kurierskiej").grid(row=0, column=0)
+entry_Couriercompany_name = Entry(frame_Couriercompany_form)
+entry_Couriercompany_name.grid(row=0, column=1)
+
+Label(frame_Couriercompany_form, text="Miejscowość:").grid(row=1, column=0)
+entry_Couriercompany_city = Entry(frame_Couriercompany_form)
+entry_Couriercompany_city.grid(row=1, column=1)
+
+button_add_Couriercompany = Button(frame_Couriercompany_form, text="Dodaj firmę kurierską", command=add_Couriercompany)
+button_add_Couriercompany.grid(row=2, column=0, columnspan=2)
+
+frame_couriercompanys.grid_columnconfigure(0, weight=1)
+frame_couriercompanys.grid_columnconfigure(1, weight=0)
+frame_couriercompanys.grid_columnconfigure(2, weight=1)
+
+
+frame_Worker_list = Frame(frame_workers)
+frame_Worker_form = Frame(frame_workers)
+frame_Worker_details = Frame(frame_workers)
+
+frame_Worker_list.grid(row=0, column=0)
+frame_Worker_form.grid(row=0, column=1)
+frame_Worker_details.grid(row=0, column=2, sticky="nsew")
+
+Label(frame_Worker_list, text="Lista pracowników:").grid(row=0, column=0, columnspan=3)
+listbox_workers = Listbox(frame_Worker_list, width=50)
+listbox_workers.grid(row=1, column=0, columnspan=3)
+Button(frame_Worker_list, text="Pokaż szczegóły", command=show_Worker_details).grid(row=2, column=0)
+Button(frame_Worker_list, text="Edytuj", command=edit_Worker).grid(row=2, column=1)
+Button(frame_Worker_list, text="Usuń", command=delete_Worker).grid(row=2, column=2)
+
+Label(frame_Worker_form, text="Imię:").grid(row=0, column=0)
+entry_Worker_name = Entry(frame_Worker_form)
+entry_Worker_name.grid(row=0, column=1)
+
+Label(frame_Worker_form, text="Nazwisko:").grid(row=1, column=0)
+entry_Worker_surname = Entry(frame_Worker_form)
+entry_Worker_surname.grid(row=1, column=1)
+
+Label(frame_Worker_form, text="Miejscowość:").grid(row=2, column=0)
+entry_Worker_city = Entry(frame_Worker_form)
+entry_Worker_city.grid(row=2, column=1)
+
+Label(frame_Worker_form, text="Firma kurierska:").grid(row=3, column=0)
+var_Worker_Couriercompany = StringVar()
+var_Worker_Couriercompany.set("Brak firm kurierskich")
+optionmenu_Worker_Couriercompany = OptionMenu(frame_Worker_form, var_Worker_Couriercompany, "Brak firm kurierskich")
+optionmenu_Worker_Couriercompany.grid(row=3, column=1)
+
+button_add_Worker = Button(frame_Worker_form, text="Dodaj pracownika", command=add_Worker)
+button_add_Worker.grid(row=4, column=0, columnspan=2)
+
+Label(frame_Worker_details, text="Imię:").grid(row=0, column=0)
+label_Worker_name_val = Label(frame_Worker_details, text="...")
+label_Worker_name_val.grid(row=0, column=1)
+
+Label(frame_Worker_details, text="Nazwisko:").grid(row=0, column=2)
+label_Worker_surname_val = Label(frame_Worker_details, text="...")
+label_Worker_surname_val.grid(row=0, column=3)
+
+Label(frame_Worker_details, text="Miejscowość:").grid(row=0, column=4)
+label_Worker_city_val = Label(frame_Worker_details, text="...")
+label_Worker_city_val.grid(row=0, column=5)
+
+Label(frame_Worker_details, text="Firma kurierska:").grid(row=0, column=6)
+label_Worker_Couriercompany_val = Label(frame_Worker_details, text="...")
+label_Worker_Couriercompany_val.grid(row=0, column=7)
+
+
+frame_clients = Frame(root)
+frame_clients.grid(row=1, column=0, sticky="nsew")
+
+frame_Client_list = Frame(frame_clients)
+frame_Client_form = Frame(frame_clients)
+frame_Client_details = Frame(frame_clients)
+
+frame_Client_list.grid(row=0, column=0)
+frame_Client_form.grid(row=0, column=1)
+frame_Client_details.grid(row=1, column=0, columnspan=2)
+
+Label(frame_Client_list, text="Lista klientów:").grid(row=0, column=0, columnspan=3)
+listbox_clients = Listbox(frame_Client_list, width=50)
+listbox_clients.grid(row=1, column=0, columnspan=3)
+Button(frame_Client_list, text="Pokaż szczegóły", command=show_Client_details).grid(row=2, column=0)
+Button(frame_Client_list, text="Edytuj", command=edit_Client).grid(row=2, column=1)
+Button(frame_Client_list, text="Usuń", command=delete_Client).grid(row=2, column=2)
+
+Label(frame_Client_form, text="Imię:").grid(row=0, column=0)
+entry_Client_name = Entry(frame_Client_form)
+entry_Client_name.grid(row=0, column=1)
+
+Label(frame_Client_form, text="Nazwisko:").grid(row=1, column=0)
+entry_Client_surname = Entry(frame_Client_form)
+entry_Client_surname.grid(row=1, column=1)
+
+Label(frame_Client_form, text="Miejscowość:").grid(row=2, column=0)
+entry_Client_city = Entry(frame_Client_form)
+entry_Client_city.grid(row=2, column=1)
+
+Label(frame_Client_form, text="Firma kurierska:").grid(row=3, column=0)
+var_Client_Couriercompany = StringVar()
+var_Client_Couriercompany.set("Brak firm kurierskich")
+optionmenu_Client_Couriercompany = OptionMenu(frame_Client_form, var_Client_Couriercompany, "Brak firm kurierskich")
+optionmenu_Client_Couriercompany.grid(row=3, column=1)
+
+
+
+button_add_Client = Button(frame_Client_form, text="Dodaj klienta", command=add_Client)
+button_add_Client.grid(row=5, column=0, columnspan=2)
+
+Label(frame_Client_details, text="Imię:").grid(row=0, column=0)
+label_Client_name_val = Label(frame_Client_details, text="...")
+label_Client_name_val.grid(row=0, column=1)
+
+Label(frame_Client_details, text="Nazwisko:").grid(row=0, column=2)
+label_Client_surname_val = Label(frame_Client_details, text="...")
+label_Client_surname_val.grid(row=0, column=3)
+
+Label(frame_Client_details, text="Miejscowość:").grid(row=0, column=4)
+label_Client_city_val = Label(frame_Client_details, text="...")
+label_Client_city_val.grid(row=0, column=5)
+
+Label(frame_Client_details, text="Firma kurierska:").grid(row=0, column=6)
+label_Client_Couriercompany_val = Label(frame_Client_details, text="...")
+label_Client_Couriercompany_val.grid(row=0, column=7)
+
+
+
+
+Button(frame_Couriercompany_list, text="Pokaż pracowników na mapie",
+       command=lambda: show_Worker_markers_for_Couriercompany(get_selected_Couriercompany_name())
+      ).grid(row=3, column=0, columnspan=3, sticky="ew", pady=(5,0))
+
+Button(frame_Couriercompany_list, text="Pokaż klientów na mapie",
+       command=lambda: show_Client_markers_for_Couriercompany(get_selected_Couriercompany_name())
+      ).grid(row=4, column=0, columnspan=3, sticky="ew", pady=(5,10))
+
+Button(frame_Couriercompany_list, text="Resetuj widok ,,firmy kurierskie''",
+       command=reset_Couriercompany_map_view
+      ).grid(row=5, column=0, columnspan=3, sticky="ew", pady=(0,10))
+
+
+
+map_widget = tkintermapview.TkinterMapView(root, width=1024, height=400)
+map_widget.set_position(52.2297, 21.0122)
+map_widget.set_zoom(6)
+map_widget.grid(row=2, column=0)
+
+
+show_couriercompanys_frame()
+root.mainloop()
