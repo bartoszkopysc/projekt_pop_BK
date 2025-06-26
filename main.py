@@ -262,3 +262,49 @@ def update_Client_Couriercompany_menu():
         menu.add_command(label=Couriercompany.name, command=lambda value=Couriercompany.name: var_Client_Couriercompany.set(value))
     if couriercompanys:
         var_Client_Couriercompany.set(couriercompanys[0].name)
+
+def clear_all_markers():
+    for s in couriercompanys:
+        if s.marker:
+            s.marker.delete()
+            s.marker = None
+    for t in workers:
+        if t.marker:
+            t.marker.delete()
+            t.marker = None
+    for st in clients:
+        if st.marker:
+            st.marker.delete()
+            st.marker = None
+
+def show_Worker_markers_for_Couriercompany(Couriercompany_name):
+    clear_all_markers()
+    for t in workers:
+        if t.Couriercompany == Couriercompany_name:
+            t.marker = map_widget.set_marker(t.coordinates[0], t.coordinates[1], text=f"{t.name} {t.surname}")
+
+def show_Client_markers_for_Couriercompany(Couriercompany_name):
+    clear_all_markers()
+    for st in clients:
+        if st.Couriercompany == Couriercompany_name:
+            st.marker = map_widget.set_marker(st.coordinates[0], st.coordinates[1], text=f"{st.name} {st.surname}")
+
+def get_selected_Couriercompany_name():
+    idx = listbox_couriercompanys.index(ACTIVE)
+    return couriercompanys[idx].name
+
+def reset_Couriercompany_map_view():
+    clear_all_markers()
+    idx = listbox_couriercompanys.index(ACTIVE)
+    s = couriercompanys[idx]
+    if s.marker is None:
+        s.marker = map_widget.set_marker(s.coordinates[0], s.coordinates[1], text=s.name)
+    show_Couriercompany_details()
+
+
+root = Tk()
+root.title("System zarządzania firmami kurierskimi i pracownikami")
+root.geometry("1024x800")
+
+button_frame = Frame(root)
+button_frame.grid(row=0, column=0)
